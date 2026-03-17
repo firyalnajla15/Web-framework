@@ -2,17 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', function () { //memanggil sebuah kelas, :: = methot static, '/' = 
     return view('welcome');
 });
-
 
 Route::get('/home', function(){
     echo "Halaman Home <br>";
     echo "Baris Kedua";
 });
 
-Route::get('/mahasiswa/ti/udin', function(){
+Route::get('/mahasiswa/ti/Udin', function(){
     echo "Selamat Datang Udin";
 });
 
@@ -20,27 +19,58 @@ Route::get('/mahasiswa/{nama}', function($nama){
     return "Selamat Datang $nama";
 });
 
-Route::get('/mahasiswa/{nama}/{nim}', function($nama, $nim){
-    return "Selamat Datang $nama, NIM: $nim";
+// route paramenter
+Route::get('/mahasiswa/{nama?}/{nim}', function($nama, $nim){
+    return "Selamat Datang $nama , NIP: $nim";
 });
 
-Route::get('/dosen/{nama?}/{nip?}', function($nama = "", $nip = ""){
-    return "Selamat Datang $nama, NIP: $nip";
-});
+// route optional paramenter
+//Route::get('/dosen/{nama?}/{nip?}', function($nama= "", $nip = ""){
+//    return "Selamat Datang $nama , NIP: $nip";
+//});
 
-//route redirect
+//route rederect //membaca yang terakhir
 Route::redirect('/home', '/');
 
 //route fallback
-//Route::fallback(function(){
-   // return "Halaman Tidak Ditemukan";
+// Route::fallback(function(){
+// return "Halaman tidak ditemukan";
+// });
+
+//Route::get('/mahasiswa', function(){
+//    $arrMhs = [
+//        'mhs1' => 'Firyal Najla',
+//        'mhs2' => 'Annisa Alpitry'
+//    ];
+//    return view('akademik.mahasiswa')->with($arrMhs); //method with()
+//    //return view('akademik.mahasiswa', $arrMhs); => parameter ke-2 view
 //});
 
-Route::get('/mahasiswa', function(){
-    $arrMhs =
-    ['mhs1' => 'Mark Zuckerberg',
-    'mhs2' => 'annisa alpiyri'];
-    
-    //return view('akademik.mahasiswa')->with($arrMhs); // menggunakan parameter ke-2
-    return view('akademik.mahasiswa')->with($arrMhs); //method with()
+//Route::get('/mahasiswa', function(){
+//    $nama = 'Firyal Najla';
+//    $nim = '2401092007';
+//    $total_nilai=100;
+//    return view('akademik.nilai_mahasiswa', compact('nama','nim','total_nilai'));
+//});
+
+Route::get('/perulangan', function(){
+    $nama = "Firyal Najla";
+    $nim = "2401092007";
+    $total_nilai = [80, 70, 20, 60, 45];
+    return view('akademik.perulangan', compact('nama','nim','total_nilai'));
 });
+
+Route::get('/mahasiswa', function(){
+    $arrMhs=['Udin', 'Budi', 'Khoirun', 'Nur', 'Filsa'];
+    return view('akademik.mahasiswa',['mhs'=>$arrMhs]);
+});
+
+Route::get('/dosen', function(){
+    $arrDosen=['Malik', 'Sahgo', 'Onta', 'Maulana', 'Mulan'];
+    return view('akademik.dosen', ['dosen'=>$arrDosen]);
+});
+
+Route::get('/pnp/{jurusan}/{prodi}', function($jurusan,$prodi){
+    $data = [$jurusan,$prodi];
+    return view('akademik.prodi')-> with('data',$data);
+})->name('prodi');
