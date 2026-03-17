@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.nilai {
+    display: flex;
+    gap: 20px;
+    font-size: 18px;
+}
+
+.nilai span {
+    background-color: #f1f1f1;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
