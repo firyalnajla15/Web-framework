@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\Auth\DosenController;
+use App\Http\Controllers\MahasiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () { //memanggil sebuah kelas, :: = methot static, '/' = 
     return view('welcome');
 });
 
-Route::get('/home', function(){
+//Route::get('/mahasiswa',[MahasiswaController::class,'index']);
+Route::get('/dosen',[DosenController::class,'index']);
+
+/*Route::get('/home', function(){
     echo "Halaman Home <br>";
     echo "Baris Kedua";
 });
@@ -73,4 +78,4 @@ Route::get('/dosen', function(){
 Route::get('/pnp/{jurusan}/{prodi}', function($jurusan,$prodi){
     $data = [$jurusan,$prodi];
     return view('akademik.prodi')-> with('data',$data);
-})->name('prodi');
+})->name('prodi');*/
